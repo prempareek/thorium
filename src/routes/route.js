@@ -2,7 +2,6 @@ const welcome = require("../logger")
 const mydetails = require("../util/helper")
 const format = require("../validator/Formatter")
 const express = require('express');
-//var  array  = require('lodash/chunk');
 const lodash = require('lodash')
 
 const router = express.Router();
