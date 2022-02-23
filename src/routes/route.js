@@ -1,32 +1,64 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/sol1', function(req, res) {
 
-    let arr = [1, 2, 3, 5, 6, 7]
-    let total = 0;
-    for (var i in arr) {
-        total += arr[i];
-    }
-    let lastDigit = arr.pop()
-    let consecutiveSum = lastDigit * (lastDigit + 1) / 2
-    let missingNumber = consecutiveSum - total
-    res.send({ data: missingNumber });
+
+router.get('/movies', (req, res) => {
+
+    res.send('["The Shining","Incendies","Rang de Basanti","Finding Demo"]');
 });
 
-router.get('/sol2', function(req, res) {
 
-    let arr = [33, 34, 35, 37, 38]
-    let len = arr.length
-    let total = 0;
-    for (var i in arr) {
-        total += arr[i];
+router.get('/movies/:moviesId', (req, res) => {
+
+    const movies = ["The Shining", "Incendies", "Rang de Basanti", "Finding Demo"];
+    const request = req.params.moviesId;
+    if (request < movies.length) {
+        res.send(movies[request])
+    } else {
+
+        res.send('not a valid ID');
     }
-    let firstDigit = arr[0]
-    let lastDigit = arr.pop()
-    let consecutiveSum = (len + 1) * (firstDigit + lastDigit) / 2
-    let missingNumber = consecutiveSum - total
-    res.send({ data: missingNumber });
+})
+
+
+
+router.get('/films', (req, res) => {
+
+
+    res.send([
+        { "id": 1, "name": "The Shining" },
+        { "id": 2, "name": "Incendies" },
+        { "id": 3, "name": "Rang de Basanti" },
+        { "id": 4, "name": "Finding Demo" }
+    ]);
+
 });
+router.get('/films/:filmld', (req, res) => {
+    const movieList = [
+        { "id": 1, "name": "The Shining" },
+        { "id": 2, "name": "Incendies" },
+        { "id": 3, "name": "Rang de Basanti" },
+        { "id": 4, "name": "Finding Demo" }
+    ];
+    let request = req.params.filmld;
+    let response = false;
+    for (let index = 0; index < movieList.length; index++) {
+        if (movieList[index].id == request) {
+            response = true;
+            res.send(movieList[index]);
+            break;
+        }
+    }
+    if (response == false) {
+        res.send('No film exists with this id');
+    }
+
+})
+
+
+
+
+
 
 module.exports = router;
