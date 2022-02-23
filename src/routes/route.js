@@ -1,53 +1,32 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/movies', function(req, res) {
+router.get('/sol1', function(req, res) {
 
-    res.send('["The Shining", "Incendies", "Rang de Basanti", "Finding Demo"]');
-
-    console.log(movies);
-
-})
-
-router.get('/movies/:movieId', function(req, res) {
-
-    mov = ["The Shining", "Incendies", "Rang de Basanti", "Finding Demo"];
-
-    let value = req.params.movieId;
-    if (value > mov.length - 1) {
-        res.send("No movie exists with this id")
-    } else {
-        res.send(mov[value]);
+    let arr = [1, 2, 3, 5, 6, 7]
+    let total = 0;
+    for (var i in arr) {
+        total += arr[i];
     }
-
-})
-
-router.get('/films', function(req, res) {
-
-    res.send([{ id: 1, name: 'The Shining' }, { id: 2, name: 'Incendies' }, { id: 3, name: 'Rang de Basanti' }, { id: 4, name: 'Finding Demo' }]);
-
-
+    let lastDigit = arr.pop()
+    let consecutiveSum = lastDigit * (lastDigit + 1) / 2
+    let missingNumber = consecutiveSum - total
+    res.send({ data: missingNumber });
 });
 
+router.get('/sol2', function(req, res) {
 
-router.get('/films/:filmId', function(req, res) {
-    let movi = [{ id: 1, name: 'The Shining' }, { id: 2, name: 'Incendies' }, { id: 3, name: 'Rang de Basanti' }, { id: 4, name: 'Finding Demo' }];
-    let value = req.params.filmId;
-    let found = false;
-    if (value > movi.length) {
-        res.send("not exist")
+    let arr = [33, 34, 35, 37, 38]
+    let len = arr.length
+    let total = 0;
+    for (var i in arr) {
+        total += arr[i];
     }
-
-    for (i = 0; i < movi.length; i++) {
-        if (movi[i].id == value) {
-            found = true
-            res.send(movi[i])
-
-
-            break;
-
-        }
-    }
-})
+    let firstDigit = arr[0]
+    let lastDigit = arr.pop()
+    let consecutiveSum = (len + 1) * (firstDigit + lastDigit) / 2
+    let missingNumber = consecutiveSum - total
+    res.send({ data: missingNumber });
+});
 
 module.exports = router;
