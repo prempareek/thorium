@@ -1,63 +1,48 @@
 const express = require('express');
 const router = express.Router();
+// ASSIGNMENT:
+// you will be given an array of persons ( i.e an array of objects )..each person will have  a {name: String , age: Number, votingStatus: true/false(Boolean)}
+// take input in query param as votingAge..and for all the people above that age, change votingStatus as true
+// also return an array consisting of only the person that can vote
+
+//  take this as sample for array of persons:
 
 
+let persons = [{
+        name: "PK",
+        age: 10,
+        votingStatus: false
+    },
+    {
+        name: "SK",
+        age: 20,
+        votingStatus: false
+    },
+    {
+        name: "AA",
+        age: 70,
+        votingStatus: false
+    },
+    {
+        name: "SC",
+        age: 5,
+        votingStatus: false
+    },
+    {
+        name: "HO",
+        age: 40,
+        votingStatus: false
+    }
+]
 
-router.get('/movies', (req, res) => {
+router.post("/person-query1", function(req, res) {
+    let input = req.query.votingAge;
+    let filtered = persons.filter(item => item.age >= input);
+    //console.log(finalArr)
+    filtered.map(item => item.votingStatus = true)
 
-    res.send('["The Shining","Incendies","Rang de Basanti","Finding Demo"]');
+    res.send(filtered)
 });
-
-
-router.get('/movies/:moviesId', (req, res) => {
-
-    const movies = ["The Shining", "Incendies", "Rang de Basanti", "Finding Demo"];
-    const request = req.params.moviesId;
-    if (request < movies.length) {
-        res.send(movies[request])
-    } else {
-
-        res.send('not a valid ID');
-    }
-})
-
-
-
-router.get('/films', (req, res) => {
-
-
-    res.send([
-        { "id": 1, "name": "The Shining" },
-        { "id": 2, "name": "Incendies" },
-        { "id": 3, "name": "Rang de Basanti" },
-        { "id": 4, "name": "Finding Demo" }
-    ]);
-
-});
-router.get('/films/:filmld', (req, res) => {
-    const movieList = [
-        { "id": 1, "name": "The Shining" },
-        { "id": 2, "name": "Incendies" },
-        { "id": 3, "name": "Rang de Basanti" },
-        { "id": 4, "name": "Finding Demo" }
-    ];
-    let request = req.params.filmld;
-    let response = false;
-    for (let index = 0; index < movieList.length; index++) {
-        if (movieList[index].id == request) {
-            response = true;
-            res.send(movieList[index]);
-            break;
-        }
-    }
-    if (response == false) {
-        res.send('No film exists with this id');
-    }
-
-})
-
-
-
 
 
 
