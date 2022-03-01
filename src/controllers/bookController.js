@@ -1,4 +1,4 @@
-const bookSchema = require("../models/bookSchema")
+const bookSchema = require("../models/bookModal");
 const mongoose = require('mongoose')
 
 
@@ -26,9 +26,9 @@ const booksInYear = async function(req, res) {
 
 const particularBooks = async function(req, res) {
 
-    let arr = year.keys(req.body) //["year"]
-    let property = arr[0] // year
-    let value = req.body[property] //value
+    let arr = Object.keys(req.body)
+    let property = arr[0]
+    let value = req.body[property]
 
     let book = await bookSchema.find({ property: value })
     res.send({ msg: book })
