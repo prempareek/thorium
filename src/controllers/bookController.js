@@ -5,14 +5,14 @@ const mongoose = require('mongoose')
 const createBook = async function(req, res) {
     let bookData = req.body
 
-    let book = await BookModel.create(bookData)
+    let book = await bookSchema.create(bookData)
     res.send({ msg: book })
 
 }
 
 const getBook = async function(req, res) {
 
-    let book = await BookModel.find().select({ bookName: 1, authorName: 1, _id: 0 })
+    let book = await bookSchema.find().select({ bookName: 1, authorName: 1, _id: 0 })
     res.send({ msg: book })
 }
 
@@ -20,7 +20,7 @@ const booksInYear = async function(req, res) {
 
     let year = req.body.year
 
-    let book = await BookModel.find({ year: year })
+    let book = await bookSchema.find({ year: year })
     res.send({ msg: book })
 }
 
@@ -30,19 +30,19 @@ const particularBooks = async function(req, res) {
     let property = arr[0] // year
     let value = req.body[property] //value
 
-    let book = await BookModel.find({ property: value })
+    let book = await bookSchema.find({ property: value })
     res.send({ msg: book })
 }
 
 const getINRBooks = async function(req, res) {
 
 
-    let book = await BookModel.find({ "price.indianPrice": { $in: ["100 RS", "200 RS", "500 RS"] } })
+    let book = await bookSchema.find({ "price.indianPrice": { $in: ["100 RS", "200 RS", "500 RS"] } })
     res.send({ msg: book })
 }
 
 const getRandomBooks = async function(req, res) {
-    let book = await BookModel.find({ $or: [{ totalPages: { $gt: 500 } }, { stockAvailable: { $eq: true } }] })
+    let book = await bookSchema.find({ $or: [{ totalPages: { $gt: 500 } }, { stockAvailable: { $eq: true } }] })
     res.send({ msg: book })
 }
 
