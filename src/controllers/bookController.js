@@ -24,14 +24,12 @@ const booksInYear = async function(req, res) {
     res.send({ msg: book })
 }
 
+
 const particularBooks = async function(req, res) {
-
-    let arr = Object.keys(req.body)
-    let property = arr[0]
-    let value = req.body[property]
-
-    let book = await bookSchema.find({ property: value })
+    let book = await bookSchema.find({ bookName: /css/i })
     res.send({ msg: book })
+
+
 }
 
 const getINRBooks = async function(req, res) {
@@ -44,6 +42,7 @@ const getINRBooks = async function(req, res) {
 const getRandomBooks = async function(req, res) {
     let book = await bookSchema.find({ $or: [{ totalPages: { $gt: 500 } }, { stockAvailable: { $eq: true } }] })
     res.send({ msg: book })
+
 }
 
 
