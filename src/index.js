@@ -3,12 +3,15 @@ const bodyParser = require('body-parser');
 const route = require('./routes/route.js');
 const { default: mongoose } = require('mongoose');
 const app = express();
+const GlobalMiddleware = require('./middleware/globleMiddleware')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use (GlobalMiddleware.globalMiddleware)
 
-mongoose.connect("mongodb+srv://functionup-cohort:G0Loxqc9wFEGyEeJ@cluster0.rzotr.mongodb.net/Pritesh8769811-DB?retryWrites=true&w=majority", {
+
+mongoose.connect("mongodb+srv://premjoshi:CAeCnXX70lt2hET5@cluster0.7vw4v.mongodb.net/new?authSource=admin&replicaSet=atlas-10yy5l-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true", {
     useNewUrlParser: true
 })
 .then( () => console.log("MongoDb is connected"))
