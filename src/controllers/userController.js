@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const userModel = require("../models/userModel");
+const userModel = require("../models/userModel")
 
 const createUser = async function (abcd, xyz) {
   //You can name the req, res objects anything.
